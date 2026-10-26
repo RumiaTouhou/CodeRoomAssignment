@@ -1,0 +1,10 @@
+import { readdirSync } from "node:fs";
+import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
+const root = fileURLToPath(new URL("../", import.meta.url));
+const excluded = new Set(["ui.test.mjs", "release.test.mjs"]);
+const paths = readdirSync(new URL("../tests/", import.meta.url)).filter(name => !excluded.has(name) && (name.endsWith(".test.ts") || name.endsWith(".test.mjs"))).sort().map(name => `tests/${name}`);
+if (!paths.length) throw new Error("No tests found");
+const result = spawnSync(process.execPath, ["--import", "tsx", "--test", ...paths], { cwd: root, stdio: "inherit" });
+if (result.error) throw result.error;
+process.exit(result.status ?? 1);

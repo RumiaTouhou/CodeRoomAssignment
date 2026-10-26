@@ -1,0 +1,233 @@
+@import "./tokens.css";
+
+/* ---------- Base ---------- */
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  /* Keep punctuation glyphs consistent regardless of neighboring characters. */
+  font-variant-ligatures: no-contextual;
+  font-feature-settings: "calt" 0;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-sage-deep);
+}
+
+/* Keyboard focus */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Scroll regions */
+.cr-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line-strong) transparent;
+}
+.cr-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.cr-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-line-strong);
+  border-radius: 3px;
+}
+.cr-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Shared metadata labels */
+
+.cr-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Transform and opacity motion */
+
+.cr-fade-up {
+  animation: cr-fade-up 200ms var(--ease-out-soft) both;
+}
+.cr-fade-in {
+  animation: cr-fade-in 160ms var(--ease-out-soft) both;
+}
+.cr-pop {
+  animation: cr-pop 180ms var(--ease-out-soft) both;
+}
+
+@keyframes cr-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes cr-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes cr-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Typing indicator */
+.cr-typing-dot {
+  animation: cr-typing 1.2s ease-in-out infinite;
+}
+.cr-typing-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.cr-typing-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes cr-typing {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  30% {
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+}
+
+/* Sending spinner for pending chips. */
+.cr-spin {
+  animation: cr-spin 0.9s linear infinite;
+}
+@keyframes cr-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Message highlight pulse after search/quote navigation. */
+.cr-highlight-ring {
+  animation: cr-highlight 2.4s var(--ease-out-soft) both;
+}
+@keyframes cr-highlight {
+  0% {
+    box-shadow: 0 0 0 2px var(--color-accent);
+    background-color: var(--color-accent-softer);
+  }
+  70% {
+    box-shadow: 0 0 0 2px var(--color-accent);
+    background-color: var(--color-accent-softer);
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+    background-color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cr-fade-up,
+  .cr-fade-in,
+  .cr-pop,
+  .cr-typing-dot,
+  .cr-spin,
+  .cr-highlight-ring {
+    animation: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Search match marks ---------- */
+
+.cr-mark {
+  background: var(--color-warn-soft);
+  color: inherit;
+  border-radius: 3px;
+  box-shadow: inset 0 -1.5px 0 var(--color-warn);
+  padding: 0 1px;
+}
+
+/* ---------- Code blocks ---------- */
+
+.cr-code {
+  font-family: var(--font-mono);
+  font-size: var(--reading-code-size, 14px);
+  line-height: 1.6;
+  tab-size: 2;
+}
+
+/* Prevent browser anchoring from competing with the application scroll controller. */
+[role="log"] { overflow-anchor: none; }
+
+
+/* Reading preferences scale content while preserving interface controls. */
+[data-reading-size="standard"] { --reading-text-size: 16px; --reading-code-size: 14px; }
+[data-reading-size="large"] { --reading-text-size: 18px; --reading-code-size: 16px; }
+[data-reading-size="larger"] { --reading-text-size: 20px; --reading-code-size: 18px; }
+.cr-message-text, .cr-composer-text { font-size: var(--reading-text-size, 16px); }
+.cr-folded-text { max-height: 19.5em; overflow: hidden; }
+.cr-folded-code { max-height: 19.2em; overflow-y: hidden; }
+.cr-message-text { overflow-wrap: anywhere; }
+
+.cr-message-actions { position: absolute; top: 0; right: 4px; }
+@media (hover: none) {
+  .cr-message-actions { position: static; width: fit-content; margin-top: 4px; opacity: 1; }
+}
+
+.cr-reaction-add { transition: opacity 140ms ease, background-color 140ms ease, color 140ms ease; }
+@media (hover: none) {
+  .cr-reaction-add { opacity: 1; position: static; }
+}
+
+.cr-composer-resize {
+  height: 10px;
+  flex: 0 0 10px;
+  cursor: ns-resize;
+  touch-action: none;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+}
+.cr-composer-resize:hover,
+.cr-composer-resize:focus-visible {
+  border-top-color: var(--color-line-strong);
+  border-bottom-color: var(--color-line-strong);
+  background: var(--color-sage);
+  outline: none;
+}
+.group:hover .cr-reaction-add,
+.group:focus-within .cr-reaction-add,
+.cr-reaction-add:focus-visible {
+  position: static;
+  opacity: 1;
+}

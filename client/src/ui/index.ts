@@ -1,0 +1,20 @@
+/** Presentation component exports. */
+export { JoinScreen } from "./JoinScreen.jsx";
+export { ChatScreen } from "./ChatScreen.jsx";
+export { RoomHeader } from "./components/RoomHeader.jsx";
+export { MessageList } from "./components/MessageList.jsx";
+export { MessageRow } from "./components/MessageRow.jsx";
+export { CodeBlock } from "./components/CodeBlock.jsx";
+export { ReactionBar } from "./components/ReactionBar.jsx";
+export { QuotePreview } from "./components/QuotePreview.jsx";
+export { ChatComposer } from "./components/ChatComposer.jsx";
+export { TypingIndicator } from "./components/TypingIndicator.jsx";
+export { SearchPanel } from "./components/SearchPanel.jsx";
+export { ConnectionBanner } from "./components/ConnectionBanner.jsx";
+export { PreferencesPanel } from "./components/PreferencesPanel.jsx";
+export { UnreadButton } from "./components/UnreadButton.jsx";
+export { NoticeStack } from "./components/NoticeStack.jsx";
+export { DeliveryStatus } from "./components/DeliveryStatus.jsx";
+export { BookmarksPanel } from "./components/BookmarksPanel.jsx";
+export { PinnedMessagePanel } from "./components/PinnedMessagePanel.jsx";
+export { MemberActivity } from "./components/MemberActivity.jsx";

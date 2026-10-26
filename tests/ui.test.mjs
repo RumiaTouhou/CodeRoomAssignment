@@ -1,0 +1,10 @@
+import { buildSync } from "esbuild";
+import { mkdirSync } from "node:fs";
+import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
+const root = fileURLToPath(new URL("../", import.meta.url));
+mkdirSync(new URL("../.test-cache/", import.meta.url), { recursive: true });
+buildSync({ entryPoints: [fileURLToPath(new URL("./ui-cases.cjs", import.meta.url))], outfile: fileURLToPath(new URL("../.test-cache/ui-tests.cjs", import.meta.url)), bundle: true, platform: "node", format: "cjs", jsx: "automatic", external: ["jsdom", "react", "react/*", "react-dom", "react-dom/*"], logLevel: "warning" });
+const r = spawnSync(process.execPath, ["--test", ".test-cache/ui-tests.cjs"], { cwd: root, stdio: "inherit", timeout: 60000 });
+if (r.error) throw r.error;
+process.exit(r.status ?? 1);

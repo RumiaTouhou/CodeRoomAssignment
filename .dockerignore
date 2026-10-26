@@ -1,0 +1,14 @@
+node_modules
+dist
+client/dist
+client/dist-preview
+.test-cache
+.browser-results
+playwright-report
+coverage
+data
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+.git
+.env*
