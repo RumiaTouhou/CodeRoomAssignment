@@ -2,6 +2,8 @@
 
 CodeRoom is a web chat application where guests can join the shared room `lobby` by entering a display name without creating an account. After joining, guests can exchange text and code messages through WebSocket without refreshing the page, and search messages still saved in SQLite when they need to review an earlier discussion.
 
+Available on Netlify at [https://websocketchatroomapplication.netlify.app/](https://websocketchatroomapplication.netlify.app/)
+
 ## Features
 
 | Feature | Behavior |
@@ -216,3 +218,25 @@ For a frontend hosted on Netlify, `netlify.toml` builds the browser files with `
 ## Contributing
 
 The `.gitignore` excludes dependencies, build files, `.env` files and the local `data/` directory, but check the remaining files in your pull request for passwords, credentials or SQLite data before submitting. Run the relevant commands in [Checks](#checks) and describe the change and tests in the pull request, including steps to reproduce a bug or an explanation of how a new feature works in the browser and server.
+
+## UI screenshot previews
+
+![](./UI%20Preview/UI1.png)
+
+![](./UI%20Preview/UI2.png)
+
+![](./UI%20Preview/UI3.png)
+
+![](./UI%20Preview/UI4.png)
+
+![](./UI%20Preview/UI5.png)
+
+![](./UI%20Preview/UI6.png)
+
+![](./UI%20Preview/UI7.png)
+
+![](./UI%20Preview/UI8.png)
+
+![](./UI%20Preview/UI9.png)
+
+![](./UI%20Preview/UI10.png)
